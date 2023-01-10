@@ -8,3 +8,9 @@
         update_cache: yes
         name: openjdk-11-jdk
         state: present
+    - name: creating user
+      ansible.builtin.user:
+        name: tomcat
+        group: tomcat
+        home: /opt/tomcat
+        shell: /bin/false    
