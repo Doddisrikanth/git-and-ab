@@ -8,19 +8,22 @@
         update_cache: yes
         name: openjdk-11-jdk
         state: present
-    - name: creating user
+    - name: create a tomcat group
+      ansible.builtin.group:
+        name: tomcat
+        state: present
+    - name: create a tomcat user
       ansible.builtin.user:
         name: tomcat
-        group: tomcat
         home: /opt/tomcat
-        shell: /bin/false    
-        state: present
+        shell: /bin/false
+        state: present      
     - name: install tomacat
       ansible.builtin.get_url:
         url: https://www-eu.apache.org/dist/tomcat/tomcat-10/v10.1.4/bin/apache-tomcat-10.1.4.tar.gz
         dest: /bin/apache-tomcat-10.1.4.tar.gz  
-    - name: untar the tomcat
+    - name: extract tomcat 10.1.4
       ansible.builtin.unarchive:
         src: https://www-eu.apache.org/dist/tomcat/tomcat-10/v10.1.4/bin/apache-tomcat-10.1.4.tar.gz
         remote_src: yes
-        dest: /opt/tomcat/       
+        dest: /opt/tomcat      
